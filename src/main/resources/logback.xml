@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+	
+	<property name="LOG_HOME" value="C:/Develop/workspaces/logs" />
+	<property name="APP_Name" value="netty-rpc" />  
+	<timestamp key="bySecond" datePattern="yyyy-MM-dd HH:mm:ss" />  
+	<contextName>${APP_Name}</contextName> 
+	
+	<!-- 控制台 appender -->  
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>[%thread] %-5p [%d] %C:%L => %m %n%n%n</pattern>
+			<charset>utf-8</charset>
+		</encoder>   
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->  
+            <level>debug</level>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>  
+        </filter>  
+    </appender>  
+    
+    
+    <!-- 出错日志 appender  -->  
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+    	<file>${LOG_HOME}/${APP_Name}/error/log_error.log</file>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+   			<fileNamePattern>${LOG_HOME}/${APP_Name}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+   			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+       	 		<maxFileSize>10MB</maxFileSize>
+    		</timeBasedFileNamingAndTriggeringPolicy>
+   		</rollingPolicy>
+   		<append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>[%thread] %-5p [%d] %C:%L => %m %n%n%n</pattern>
+			<charset>utf-8</charset>
+		</encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->  
+            <level>ERROR</level>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>  
+        </filter>  
+    </appender>  
+    
+    
+    <!-- 访问日志 appender  -->  
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        
+        
+        <file>${LOG_HOME}/${APP_Name}/access/log_access.log</file>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+   			<fileNamePattern>${LOG_HOME}/${APP_Name}/access/log-access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+   			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+       	 		<maxFileSize>10MB</maxFileSize>
+    		</timeBasedFileNamingAndTriggeringPolicy>
+   		</rollingPolicy>
+   		
+   		<append>true</append>
+        
+        
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>[%thread] %-5p [%d] %C:%L => %m %n%n%n</pattern>
+			<charset>utf-8</charset>
+		</encoder> 
+		
+    </appender>  
+    
+    
+    <!-- info日志 appender  -->  
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+    	<file>${LOG_HOME}/${APP_Name}/info/log_info.log</file>
+    	
+    	
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+   			<fileNamePattern>${LOG_HOME}/${APP_Name}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+   			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+       	 		<maxFileSize>10MB</maxFileSize>
+    		</timeBasedFileNamingAndTriggeringPolicy>
+   		</rollingPolicy>
+        
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>[%thread] %-5p [%d] %C:%L => %m %n%n%n</pattern>
+			<charset>utf-8</charset>
+		</encoder>  
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->  
+            <level>INFO</level>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>  
+        </filter>  
+    </appender>
+    
+    
+    <!--日志打印的包的范围，及分类日志文件存储 -->  
+    <logger name="com.wen.jun.netty.rpc" additivity="false">  
+        <level value="DEBUG" />  
+        <!-- <appender-ref ref="STDOUT"/>  -->
+        <appender-ref ref="ERROR"/>  
+        <appender-ref ref="ACCESS"/>
+        <appender-ref ref="INFO" />  
+    </logger>  
+  
+  
+    <!--控制台打印资源加载信息-->  
+    <root level="DEBUG">  
+        <appender-ref ref="STDOUT" />  
+    </root>  
+    
+    
+    
+</configuration>

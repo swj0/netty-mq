@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+        <!--
+        配制文档请参考:http://mybatis.github.io/mybatis-3/zh/configuration.html
+        或者 http://mybatis.github.io/mybatis-3/java-api.html
+        -->
+<configuration >
+	
+    <settings>
+        <!--
+        指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，这对于有 Map.keySet() 依赖或 null 值初始化的时候是有用的。
+        注意原始类型（int、boolean等）是不能设置成 null 的
+        -->
+        <setting name="callSettersOnNulls" value="true"/>
+        <setting name="cacheEnabled" value="true"/>
+
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+
+        <!--
+        是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射. 默认为false
+        -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+    <!--<typeHandlers>
+        <package name="com.yijushang.yivshop.common.mybatis.typehandler"/>
+    </typeHandlers>-->
+    <!--处理枚举请参考: http://mybatis.github.io/mybatis-3/zh/configuration.html 处理枚举类型.
+    默认使用 EnumTypeHandler 也就是按名称字符串的方式存储
+    -->
+    <!--<mappers></mappers>-->
+    
+    <plugins>
+        <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"/>
+        </plugin>
+        <!-- <plugin interceptor="com.github.miemiedev.mybatis.callable.CallableConvertInterceptor"></plugin> -->
+    </plugins>
+
+</configuration>
