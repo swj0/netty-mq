@@ -215,7 +215,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.newlandframework.rpc.boot.RpcServerStarter</mainClass>
+                            <mainClass>com.wen.jun.mq.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
